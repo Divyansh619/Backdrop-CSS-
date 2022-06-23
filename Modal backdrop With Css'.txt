@@ -1,0 +1,205 @@
+<Backdrop />
+            <div className={classes.modal}>
+             <div className={classes.ModalProfBox}>
+             <div className={classes.ModalCheckIcon}>
+                <BsCheckLg className={classes.modalcheck} />
+              </div>
+              <h2 className={classes.headText}>Congratulations</h2>
+              <div className={classes.modalmainText}>
+                You have succesfully completed your profile
+              </div>
+              <ModalButton
+                btnName={"Okay"}
+                btnType={"btnProfile"}
+                onClick={() => props.setshow("")}
+              />
+             </div>
+            </div>
+
+............................................... backdrop function ............................................!
+
+
+ const Backdrop = () => {
+    return <div className={classes.backdrop} />;
+  };
+
+
+
+................................................. C        S             S ....................................................... !
+
+
+.backdrop {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  }
+
+  .modal, .modalSkills {
+    position: fixed;
+    z-index: 20;
+    background: #fff;
+    height: 250px;
+    width: 300px;
+    border-radius: 10px;
+    padding: 5px;
+    
+    / Center the modal /
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+  .modalSkills{
+    height: 260px;
+  }
+  
+  .ModalProfBox ,.ModalCreditBox, .ModalBrainBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ModalCreditBox, .ModalBrainBox{
+    margin: 30px 30px;
+    text-align: center;
+  }
+  .ModalBrainBox{
+
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .modalmainText {
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .modalcheck {
+    height: 30px;
+    width: 30px;
+    border: 1px solid;
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 50%;
+    / background-color: #0c2551; /
+    background-color: green;
+    color: #fff;
+    / border-color: #0c2551; /
+    border-color: green;
+  }
+
+  .headText{
+    margin-bottom: 0px;
+  }
+  
+  .ModalCheckTextSecond {
+    text-align: center;
+    margin: 16px 0px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .ModalCheckIcon{
+    margin: 5px 0px;
+    margin-bottom: 0px;
+  }
+  .crossicon{
+    float: right;
+  }
+  .ActionBtn{
+    display: flex;
+    width: 230px;
+    justify-content: space-between;
+  }
+  .ActionBtnSkills{
+    text-align: center;
+  }
+  .ModalCredTextFirst{
+    margin-top: 14px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .modal {
+     width: 350px;
+    }
+    .modalmainText {
+      padding: 20px;
+    }
+    .ModalBrainBox{
+      margin: 30px 30px;
+    }
+    .modalSkills{
+      width: 400px;
+      height: 230px;
+    }
+  }
+
+
+....................................................................... 
+----------------------------------------------------------------------- Using Switch Case For Modal -------------->
+
+-------------------------------------------->
+
+const modalType = (type) => {
+    switch (type) {
+      case 'modal1':
+        return (
+          <>
+            <Backdrop />
+            <div className={classes.modal}>
+              <div className={classes.ModalProfBox}>
+                <div className={classes.modalmainText}> Your form is Approved </div>
+              </div >
+              <div className={classes.okcancel}>
+                <div className={classes.ok} onClick={() => props.setshow('')}> YES</div>
+                <div className={classes.cancel} onClick={() => props.setshow('')}> NO</div>
+              </div>
+            </div>
+
+          </>
+        );
+      case 'modal2':
+        return (
+          <>
+            <Backdrop />
+            <div className={classes.modal}>
+              <div className={classes.ModalProfBox}>
+                <div className={classes.modalmainText}> Do you want your form to be Rejected ? </div>
+              </div>
+              <div className={classes.input}> <input className={classes.inputbox} placeholder="Enter the reason for rejection" /> </div>
+              <div className={classes.okcancel}>
+                <div className={classes.ok} onClick={() => props.setshow('')}> YES</div>
+                <div onClick={() => props.setshow('')} className={classes.cancel}> NO </div>
+              </div>
+            </div>
+          </>
+        );
+      default:
+        return (
+          <div
+            style={{
+              visibility: show ? "visible" : "hidden",
+              opacity: show ? "1" : "0"
+            }}
+            className={classes.overlay}
+          >
+            <div className={classes.popup}>
+              <h4>{props.title}</h4>
+              <span className={classes.close} onClick={'closeHandler'}>
+                &times;
+              </span>
+              <div className={classes.content}>{props.children}</div>
+            </div>
+          </div>
+        );
+    };
+
+  }
+  return modalType(props.modalCateg);
+
+};
